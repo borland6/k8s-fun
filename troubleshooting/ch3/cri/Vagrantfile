@@ -2,8 +2,8 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "bento/ubuntu-18.04"
-  config.vm.box_version ='201912.14.0'
+  config.vm.box = "bento/ubuntu-20.04"
+  config.vm.box_version ='202206.03.0'
   config.vm.hostname = 'k8s-dev'
   config.vm.define vm_name = 'k8s'
 
@@ -14,8 +14,8 @@ Vagrant.configure("2") do |config|
     sudo apt-get update && sudo apt-get install -y apt-transport-https curl vim git bash-completion
 
     # cri-o
-    export OS=xUbuntu_18.04
-    export VERSION=1.18
+    export OS=xUbuntu_20.04
+    export VERSION=1.21
     echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
     echo "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/$VERSION/$OS/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.list
     curl -L https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:$VERSION/$OS/Release.key | sudo apt-key add -
@@ -27,12 +27,12 @@ Vagrant.configure("2") do |config|
     curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/testing/xUbuntu_${VERSION_ID}/Release.key | sudo apt-key add -
 
     # Docker
-    export DOCKER_VERSION="5:19.03.5~3-0~ubuntu-bionic"
+    export DOCKER_VERSION="5:20.10.16~3-0~ubuntu-focal"
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
     # kubectl
-    export KUBE_VERSION="1.18.0"
+    export KUBE_VERSION="1.21.0"
     sudo apt-get update && sudo apt-get install -y apt-transport-https curl
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
     echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee --append /etc/apt/sources.list.d/kubernetes.list
